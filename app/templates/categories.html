@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}Categories - Ryton Store{% endblock %}
+
+{% block content %}
+<h1>Categories</h1>
+<p class="lead">Browse Ryton packages by category</p>
+
+<div class="row mt-4">
+    {% for tag, count in tags %}
+    <div class="col-md-4 mb-4">
+        <a href="/?tag={{ tag }}" class="text-decoration-none">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h3 class="card-title">
+                        <i class="fas 
+                        {% if tag == 'utility' %}fa-tools
+                        {% elif tag == 'game' %}fa-gamepad
+                        {% elif tag == 'tool' %}fa-wrench
+                        {% elif tag == 'development' %}fa-code
+                        {% elif tag == 'productivity' %}fa-tasks
+                        {% elif tag == 'education' %}fa-graduation-cap
+                        {% elif tag == 'multimedia' %}fa-photo-video
+                        {% elif tag == 'network' %}fa-network-wired
+                        {% elif tag == 'system' %}fa-cogs
+                        {% elif tag == 'security' %}fa-shield-alt
+                        {% elif tag == 'communication' %}fa-comments
+                        {% elif tag == 'entertainment' %}fa-film
+                        {% elif tag == 'graphics' %}fa-image
+                        {% elif tag == 'science' %}fa-flask
+                        {% elif tag == 'office' %}fa-file-alt
+                        {% else %}fa-tag
+                        {% endif %}
+                        me-2"></i>{{ tag }}
+                    </h3>
+                    <p class="card-text">{{ count }} package{% if count != 1 %}s{% endif %}</p>
+                </div>
+            </div>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

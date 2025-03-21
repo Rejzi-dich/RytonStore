@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Ryton Store - Packages{% endblock %}
+
+{% block content %}
+<h1>Ryton Packages</h1>
+
+{% if search_query %}
+<p>Search results for: "{{ search_query }}"</p>
+{% endif %}
+
+{% if packages %}
+<div class="row mt-4">
+    {% for package in packages %}
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                    <img src="{{ package.owner.avatar_url }}" alt="{{ package.owner.login }}" 
+                         class="avatar me-2" style="width: 24px !important; height: 24px !important; flex-shrink: 0;">
+                    <div style="width: calc(100% - 30px);">
+                        <!-- Увеличиваем доступное пространство и разрешаем перенос текста -->
+                        <h5 class="card-title mb-0" style="overflow: hidden; text-overflow: ellipsis; white-space: normal; font-size: 1rem;">
+                            {{ package.name }}
+                        </h5>
+                        <small class="text-muted">
+                            by {{ package.owner.login }}
+                            {% if package.owner.status == "CLteam Member" %}
+                                <span class="badge bg-primary"><i class="fas fa-check-circle"></i> CLteam</span>
+                            {% elif package.owner.status == "Trusted Developer" %}
+                                <span class="badge bg-success"><i class="fas fa-check-circle"></i> Trusted</span>
+                            {% endif %}
+                        </small>
+                    </div>
+                </div>                        
+                <p class="card-text">{{ package.description }}</p>
+                <div class="package-meta">
+                    <span class="badge bg-secondary me-2">v{{ package.version }}</span>
+                    <span class="me-2"><i class="fas fa-star text-warning"></i> {{ package.stars }}</span>
+                    <span><i class="fas fa-user"></i> {{ package.owner.login }}</span>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a href="/package/{{ loop.index0 }}" class="btn btn-primary">Details</a>
+                {% if package.download_url %}
+                <a href="{{ package.download_url }}" class="btn btn-success">Download</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="alert alert-info mt-4">
+    {% if search_query %}
+    No packages found matching "{{ search_query }}".
+    {% else %}
+    No packages available yet. <a href="/add">Add a package</a> to get started.
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}

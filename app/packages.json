@@ -1,0 +1,51 @@
+[
+  {
+    "name": "DeltaShell",
+    "description": "\u041c\u043e\u0449\u043d\u0430\u044f \u043a\u043e\u043c\u0430\u043d\u0434\u043d\u0430\u044f \u043e\u0431\u043e\u043b\u043e\u0447\u043a\u0430, \u043d\u0430\u043f\u0438\u0441\u0430\u043d\u043d\u0430\u044f \u043d\u0430 Ryton",
+    "github_url": "https://github.com/Rejzi-dich/DeltaShell",
+    "owner": {
+      "login": "Rejzi-dich",
+      "avatar_url": "https://avatars.githubusercontent.com/u/150058216?v=4",
+      "name": "Rejzi-Dich",
+      "bio": "\u041f\u0440\u0438\u0432\u0435\u0442, \u044f Rejzi - Python \u0438 Zig \u043a\u043e\u0434\u0435\u0440.\r\n\u0410 \u0442\u0430\u043a\u0436\u0435 \u0433\u043b\u0430\u0432\u043d\u044b\u0439 \u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u0447\u0438\u043a \u0432 CodeLibraty team.",
+      "status": "CLteam Member"
+    },
+    "download_url": "",
+    "published_at": "N/A",
+    "stars": 0,
+    "forks": 0,
+    "watchers": 0,
+    "language": null,
+    "open_issues": 0,
+    "created_at": "03 Mar 2025",
+    "updated_at": "03 Mar 2025",
+    "version": "",
+    "release_notes": ""
+  },
+  {
+    "name": "RytonCalc",
+    "description": "\u041f\u0440\u043e\u0434\u0432\u0438\u043d\u0443\u0442\u044b\u0439 \u043a\u0430\u043b\u044c\u043a\u0443\u043b\u044f\u0442\u043e\u0440 \u0441 \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u043e\u0439 \u043d\u0430\u0443\u0447\u043d\u044b\u0445 \u0432\u044b\u0447\u0438\u0441\u043b\u0435\u043d\u0438\u0439",
+    "github_url": "https://github.com/CodeLibraty/RytonCalc",
+    "stars": 28,
+    "owner": {
+      "login": "CodeLibraty",
+      "avatar_url": "https://avatars.githubusercontent.com/u/87654321"
+    },
+    "version": "1.2.0",
+    "download_url": "https://github.com/CodeLibraty/RytonCalc/releases/download/v1.2.0/RytonCalc.ryx",
+    "published_at": "2023-09-20T15:30:00Z"
+  },
+  {
+    "name": "FileManager",
+    "description": "\u0421\u043e\u0432\u0440\u0435\u043c\u0435\u043d\u043d\u044b\u0439 \u0444\u0430\u0439\u043b\u043e\u0432\u044b\u0439 \u043c\u0435\u043d\u0435\u0434\u0436\u0435\u0440 \u0441 \u0438\u043d\u0442\u0443\u0438\u0442\u0438\u0432\u043d\u044b\u043c \u0438\u043d\u0442\u0435\u0440\u0444\u0435\u0439\u0441\u043e\u043c",
+    "github_url": "https://github.com/RytonDev/FileManager",
+    "stars": 56,
+    "owner": {
+      "login": "RytonDev",
+      "avatar_url": "https://avatars.githubusercontent.com/u/55555555"
+    },
+    "version": "0.9.5",
+    "download_url": "https://github.com/RytonDev/FileManager/releases/download/v0.9.5/FileManager.ryx",
+    "published_at": "2023-11-05T09:45:00Z"
+  }
+]

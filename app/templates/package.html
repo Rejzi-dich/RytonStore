@@ -1,0 +1,239 @@
+{% extends "base.html" %}
+
+{% block title %}{{ package.name }} - Ryton Store{% endblock %}
+
+{% block content %}
+<div class="package-header d-flex align-items-center mb-4">
+    <img src="{{ package.owner.avatar_url }}" alt="{{ package.owner.login }}" 
+         class="avatar-large me-3" style="width: 48px; height: 48px; border-radius: 50%; object-fit: cover;">
+    <div>
+        <h1 style="font-size: 1.75rem;">{{ package.name }}</h1>
+        <p class="text-muted" style="margin-bottom: 0;">
+            by <a href="https://github.com/{{ package.owner.login }}" target="_blank">{{ package.owner.login }}</a>
+            {% if package.owner.status == "CLteam Member" %}
+                <span class="badge bg-primary"><i class="fas fa-check-circle"></i> CLteam Member</span>
+            {% elif package.owner.status == "Trusted Developer" %}
+                <span class="badge bg-success"><i class="fas fa-check-circle"></i> Trusted Developer</span>
+            {% endif %}
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <!-- Основное содержимое слева -->
+    <div class="col-md-8">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Rating</h3>
+            </div>
+            <div class="card-body">
+                <div class="rating-info mb-3">
+                    <div class="d-flex align-items-center mb-2">
+                        <div class="me-2"><strong>{{ package.stars }}</strong> stars</div>
+                        <div class="flex-grow-1">
+                            <div class="progress">
+                                <!-- Максимум 100 звезд для полной полосы, можно настроить -->
+                                <div class="progress-bar bg-warning" role="progressbar" 
+                                    style="width: {{ stars_percent }}%;" 
+                                    aria-valuenow="{{ package.stars }}" aria-valuemin="0" aria-valuemax="100">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="{{ package.github_url }}" target="_blank" class="btn btn-warning">
+                        <i class="fas fa-star"></i> Rate on GitHub
+                    </a>
+                    <small class="text-muted d-block mt-2">
+                        Rating is based on GitHub stars. Click the button above to star the repository.
+                    </small>
+                </div>
+            </div>
+        </div>        
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2>Description</h2>
+                <p>{{ package.description }}</p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <h2>Installation</h2>
+                <p>Install this package using the Ryton package manager:</p>
+                <div class="code-block">
+                    <code>ryx install {{ package.name }}.ryx</code>
+                </div>
+            </div>
+        </div>
+
+        {% if package.release_notes %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Release Notes</h3>
+            </div>
+            <div class="card-body">
+                <p>{{ package.release_notes }}</p>
+            </div>
+        </div>
+        {% endif %}
+
+        {% if package.topics %}
+
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Categories</h3>
+            </div>
+            <div class="card-body">
+                <div class="tags">
+                    {% for topic in package.topics %}
+                    <a href="/?tag={{ topic }}" class="badge 
+                        {% if topic == 'utility' %}bg-primary
+                        {% elif topic == 'game' %}bg-success
+                        {% elif topic == 'tool' %}bg-info
+                        {% elif topic == 'development' %}bg-warning text-dark
+                        {% elif topic == 'productivity' %}bg-danger
+                        {% elif topic == 'education' %}bg-secondary
+                        {% elif topic == 'multimedia' %}bg-dark
+                        {% elif topic == 'network' %}bg-light text-dark
+                        {% elif topic == 'system' %}bg-primary
+                        {% elif topic == 'security' %}bg-danger
+                        {% elif topic == 'communication' %}bg-info
+                        {% elif topic == 'entertainment' %}bg-success
+                        {% elif topic == 'graphics' %}bg-warning text-dark
+                        {% elif topic == 'science' %}bg-secondary
+                        {% elif topic == 'office' %}bg-dark
+                        {% else %}bg-secondary
+                        {% endif %}
+                        text-decoration-none me-1 mb-1 p-2">
+                        <i class="fas 
+                        {% if topic == 'utility' %}fa-tools
+                        {% elif topic == 'game' %}fa-gamepad
+                        {% elif topic == 'tool' %}fa-wrench
+                        {% elif topic == 'development' %}fa-code
+                        {% elif topic == 'productivity' %}fa-tasks
+                        {% elif topic == 'education' %}fa-graduation-cap
+                        {% elif topic == 'multimedia' %}fa-photo-video
+                        {% elif topic == 'network' %}fa-network-wired
+                        {% elif topic == 'system' %}fa-cogs
+                        {% elif topic == 'security' %}fa-shield-alt
+                        {% elif topic == 'communication' %}fa-comments
+                        {% elif topic == 'entertainment' %}fa-film
+                        {% elif topic == 'graphics' %}fa-image
+                        {% elif topic == 'science' %}fa-flask
+                        {% elif topic == 'office' %}fa-file-alt
+                        {% else %}fa-tag
+                        {% endif %}
+                        me-1"></i>{{ topic }}
+                    </a>
+                    {% endfor %}
+                </div>
+                
+                {% if package.all_topics and package.all_topics|length > package.topics|length %}
+                <div class="mt-3">
+                    <small class="text-muted">Other tags: 
+                        {% for topic in package.all_topics %}
+                            {% if topic not in package.topics %}
+                            <span class="badge bg-light text-dark me-1">{{ topic }}</span>
+                            {% endif %}
+                        {% endfor %}
+                    </small>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="card mb-4">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3>Reviews</h3>
+                <a href="{{ package.github_url }}/issues/new?labels=review&template=review.md&title=Review: {{ package.name }}" 
+                   target="_blank" class="btn btn-primary btn-sm">
+                    <i class="fas fa-comment"></i> Write a Review
+                </a>
+            </div>
+            <div class="card-body">
+                {% if reviews %}
+                    <div class="reviews-list">
+                        {% for review in reviews %}
+                        <div class="review-item mb-3">
+                            <div class="d-flex align-items-start">
+                                <img src="{{ review.author_avatar }}" alt="{{ review.author }}" 
+                                     class="avatar me-2" style="width: 32px; height: 32px;">
+                                <div class="flex-grow-1">
+                                    <div class="d-flex justify-content-between">
+                                        <h5 class="mb-0">{{ review.title }}</h5>
+                                        <small class="text-muted">{{ review.created_at }}</small>
+                                    </div>
+                                    <div class="text-muted mb-2">
+                                        by <a href="https://github.com/{{ review.author }}" target="_blank">{{ review.author }}</a>
+                                        {% if review.state == "closed" %}
+                                        <span class="badge bg-success">Resolved</span>
+                                        {% endif %}
+                                    </div>
+                                    <div class="review-content">
+                                        {{ review.body|truncate(200) }}
+                                        {% if review.body|length > 200 %}
+                                        <a href="{{ review.url }}" target="_blank">Read more</a>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% if not loop.last %}<hr>{% endif %}
+                        {% endfor %}
+                    </div>
+                    
+                    {% if reviews|length >= 10 %}
+                    <div class="text-center mt-3">
+                        <a href="{{ package.github_url }}/issues?q=is%3Aissue+label%3Areview" 
+                           target="_blank" class="btn btn-outline-secondary">
+                            <i class="fas fa-comments"></i> View All Reviews
+                        </a>
+                    </div>
+                    {% endif %}
+                {% else %}
+                    <p>No reviews yet. Be the first to review this package!</p>
+                    <a href="{{ package.github_url }}/issues/new?labels=review&template=review.md&title=Review: {{ package.name }}" 
+                       target="_blank" class="btn btn-primary">
+                        <i class="fas fa-comment"></i> Write a Review
+                    </a>
+                {% endif %}
+            </div>
+        </div>        
+    </div>
+
+    <!-- Боковая панель с информацией справа -->
+    <div class="col-md-4">
+        <div class="card mb-4">
+            <div class="card-header">
+                <h3>Package Information</h3>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled">
+                    <li><strong>Version:</strong> {{ package.version or "N/A" }}</li>
+                    <li><strong>Stars:</strong> {{ package.stars or 0 }}</li>
+                    <li><strong>Forks:</strong> {{ package.forks or 0 }}</li>
+                    <li><strong>Watchers:</strong> {{ package.watchers or 0 }}</li>
+                    <li><strong>Language:</strong> {{ package.language or "N/A" }}</li>
+                    <li><strong>Open Issues:</strong> {{ package.open_issues or 0 }}</li>
+                    <li><strong>Created:</strong> {{ package.created_at or "N/A" }}</li>
+                    <li><strong>Updated:</strong> {{ package.updated_at or "N/A" }}</li>
+                    <li><strong>Published:</strong> {{ package.published_at or "N/A" }}</li>
+                </ul>
+                
+                <div class="d-grid gap-2 mt-3">
+                    {% if package.download_url %}
+                    <a href="{{ package.download_url }}" class="btn btn-success">
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                    {% endif %}
+                    <a href="{{ package.github_url }}" target="_blank" class="btn btn-outline-secondary">
+                        <i class="fab fa-github"></i> View on GitHub
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

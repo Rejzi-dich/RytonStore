@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}Add Package - Ryton Store{% endblock %}
+
+{% block content %}
+<h1>Add New Package</h1>
+
+{% if error %}
+<div class="alert alert-danger mt-3">
+    {{ error }}
+</div>
+{% endif %}
+
+<div class="card mt-4">
+    <div class="card-body">
+        <form method="post" action="/add">
+            <div class="mb-3">
+                <label for="github_url" class="form-label">GitHub Repository URL</label>
+                <input type="url" class="form-control" id="github_url" name="github_url" 
+                       placeholder="https://github.com/username/repo" required>
+                <div class="form-text">
+                    Enter the URL of a GitHub repository with Ryton packages. 
+                    The repository should have at least one release with a .ryx file.
+                    <strong>Note:</strong> You can only add repositories that belong to you or your organizations.
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Package</button>
+        </form>
+    </div>
+</div>
+
+<div class="mt-4">
+    <h3>Your GitHub Repositories</h3>
+    <div class="repo-list mt-3" id="repoList">
+        <div class="text-center">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p>Loading your repositories...</p>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Загружаем репозитории пользователя
+    fetch('/api/user/repos')
+        .then(response => response.json())
+        .then(repos => {
+            const repoList = document.getElementById('repoList');
+            repoList.innerHTML = '';
+            
+            if (repos.length === 0) {
+                repoList.innerHTML = '<div class="alert alert-info">No repositories found.</div>';
+                return;
+            }
+            
+            const row = document.createElement('div');
+            row.className = 'row';
+            
+            repos.forEach(repo => {
+                const col = document.createElement('div');
+                col.className = 'col-md-6 col-lg-4 mb-3';
+                
+                col.innerHTML = `
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h5 class="card-title">${repo.name}</h5>
+                            <p class="card-text text-muted small">${repo.description || 'No description'}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <span><i class="fas fa-star text-warning"></i> ${repo.stars}</span>
+                                <button class="btn btn-sm btn-outline-primary select-repo" 
+                                        data-url="${repo.html_url}">Select</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                
+                row.appendChild(col);
+            });
+            
+            repoList.appendChild(row);
+            
+            // Добавляем обработчики для кнопок выбора репозитория
+            document.querySelectorAll('.select-repo').forEach(button => {
+                button.addEventListener('click', function() {
+                    document.getElementById('github_url').value = this.dataset.url;
+                });
+            });
+        })
+        .catch(error => {
+            document.getElementById('repoList').innerHTML = 
+                `<div class="alert alert-danger">Error loading repositories: ${error.message}</div>`;
+        });
+});
+</script>
+{% endblock %}

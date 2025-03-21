@@ -1,0 +1,287 @@
+/* Основные стили */
+:root {
+    --primary-color: #4a6bff;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Шапка и навигация */
+.navbar-brand img {
+    margin-right: 10px;
+}
+
+/* Стили для аватарок в карточках на главной странице */
+.package-card .avatar,
+.card .card-body .d-flex .avatar,
+.col-md-6 .card .card-body .d-flex .avatar {
+    width: 32px !important;
+    height: 32px !important;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    margin-right: 10px;
+}
+
+/* Контейнер с информацией в карточке */
+.card .card-body .d-flex {
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Название пакета в карточке */
+.card .card-body .d-flex .card-title {
+    margin-bottom: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: calc(100% - 50px);
+}
+
+/* Главная страница */
+.hero-section {
+    background: linear-gradient(135deg, var(--primary-color), #8e44ad);
+    color: white;
+    padding: 80px 0;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.hero-section h1 {
+    font-size: 3rem;
+    margin-bottom: 20px;
+}
+
+.search-box {
+    max-width: 600px;
+    margin: 30px auto 0;
+    position: relative;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 15px 20px;
+    border-radius: 30px;
+    border: none;
+    font-size: 1.1rem;
+}
+
+.search-box button {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+
+/* Карточки пакетов */
+.package-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.package-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.package-card:hover {
+    transform: translateY(-5px);
+}
+
+.package-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.package-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.package-icon-small {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.package-info {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.package-info h3 {
+    margin-top: 0;
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+}
+
+.package-author {
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+}
+
+.package-meta {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 10px;
+    font-size: 0.9rem;
+    color: var(--secondary-color);
+}
+
+.package-description {
+    color: #555;
+    font-size: 0.95rem;
+    margin-bottom: 0;
+}
+
+/* Категории */
+.category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.category-card {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    color: var(--dark-color);
+    text-decoration: none;
+    transition: transform 0.3s ease;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    color: var(--primary-color);
+}
+
+.category-card i {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.category-card h3 {
+    margin: 0;
+    font-size: 1.2rem;
+}
+
+/* Список пакетов */
+.package-list {
+    margin-top: 30px;
+}
+
+.package-list-item {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.package-actions {
+    margin-left: auto;
+}
+
+/* Детальная страница пакета */
+.package-header {
+    margin-bottom: 20px;
+}
+
+.package-header .package-icon {
+    width: 80px;
+    height: 80px;
+}
+
+.code-block {
+    background: #f5f5f5;
+    padding: 15px;
+    border-radius: 5px;
+    font-family: monospace;
+    margin: 15px 0;
+}
+
+.security-score {
+    margin-bottom: 15px;
+}
+
+/* Рейтинг звездами */
+.rating-input {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+}
+
+.rating-input input {
+    display: none;
+}
+
+.rating-input label {
+    cursor: pointer;
+    font-size: 1.5rem;
+    color: #ddd;
+    margin-right: 5px;
+}
+
+.rating-input label:hover,
+.rating-input label:hover ~ label,
+.rating-input input:checked ~ label {
+    color: #ffc107;
+}
+
+/* Отзывы */
+.review-item {
+    margin-bottom: 20px;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    .package-list-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .package-actions {
+        margin-left: 0;
+        margin-top: 15px;
+        width: 100%;
+    }
+    
+    .package-actions .btn {
+        width: 100%;
+    }
+}

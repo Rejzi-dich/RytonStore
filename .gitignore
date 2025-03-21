@@ -1,0 +1,3 @@
+venv_py311
+app/.env.local
+app/__pycache__
