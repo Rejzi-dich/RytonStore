@@ -9,3 +9,4 @@ python-jose==3.3.0
 passlib==1.7.4
 httpx==0.24.0
 pygithub==1.58.1
+mangum==0.17.0

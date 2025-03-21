@@ -13,6 +13,10 @@ import secrets
 
 app = FastAPI(title="Ryton Store")
 
+# этот блок для Vercel
+from mangum import Mangum
+handler = Mangum(app)
+
 # Настройки OAuth
 from dotenv import load_dotenv
 
